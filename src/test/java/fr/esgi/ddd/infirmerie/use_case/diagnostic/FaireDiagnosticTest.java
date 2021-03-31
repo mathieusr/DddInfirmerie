@@ -53,6 +53,18 @@ public class FaireDiagnosticTest {
     }
 
     @Test
+    public void should_diagnostic_student_with_urgent_symptoms(){
+        Eleve eleve = new Eleve();
+
+        FakeDiagnostics diagnostics = new FakeDiagnostics();
+
+        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
+        Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.URGENT);
+
+        assertTrue("Le résultat du diagnostic doit être urgent", resultat.getEtatSante() == EtatSante.URGENT);
+    }
+
+    @Test
     public void should_diagnostic_student_with_psychological_symptoms(){
         Eleve eleve = new Eleve();
 
