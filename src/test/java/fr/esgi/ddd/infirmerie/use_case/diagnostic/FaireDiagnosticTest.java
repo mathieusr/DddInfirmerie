@@ -14,13 +14,17 @@ public class FaireDiagnosticTest {
 
     @Test()
     public void should_diagnostic_student_with_antecendent(){
+        
         ArrayList<EtatSante> antecedents = new ArrayList<EtatSante>();
         antecedents.add(EtatSante.BENIN);
+        
         Eleve eleve = new Eleve(antecedents);
 
-        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(eleve);
+        FakeDiagnostics diagnostics = new FakeDiagnostics();
+
+        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
         Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.BENIN);
 
-        assertTrue("le résultat du diagnostic doit être être lié aux antécédents de l'élève.", resultat.antecendents);
+        assertTrue("le résultat du diagnostic doit être être lié aux antécédents de l'élève.", resultat.isLinkedToAntecedants());
     }
 }
