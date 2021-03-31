@@ -27,7 +27,7 @@ public class AllerInfirmerieTest {
 
     @Test
     public void should_throw_an_capactiy_depasse_exception_when_capacity_is_overwhelmed()
-            throws Exception, CapaciteDepasseException {
+            throws Exception {
 
         FakeEntreesInfirmerie entrees = new FakeEntreesInfirmerie();
 
