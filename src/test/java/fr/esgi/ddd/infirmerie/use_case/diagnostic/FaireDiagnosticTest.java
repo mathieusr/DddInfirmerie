@@ -4,10 +4,16 @@ import fr.esgi.ddd.infirmerie.model.Eleve;
 import fr.esgi.ddd.infirmerie.model.EtatSante;
 import fr.esgi.ddd.infirmerie.model.diagnostic.Diagnostic;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
+
+import org.junit.Test;
 
 public class FaireDiagnosticTest {
 
+    @Test()
     public void should_diagnostic_student_with_antecendent() throws Exception {
         ArrayList<EtatSante> antecedents = new ArrayList<EtatSante>();
         antecedents.add(EtatSante.BENIN);
@@ -16,8 +22,6 @@ public class FaireDiagnosticTest {
         FaireDiagnostic faireDiagnostic = new FaireDiagnostic(eleve);
         Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.BENIN);
 
-        if(resultat.antecendents == false) {
-            throw new Exception("Use case must throw exception when student has antecedent diagnosed");
-        }
+        assertTrue("le résultat du diagnostic doit être être lié aux antécédents de l'élève.", resultat.antecendents);
     }
 }
