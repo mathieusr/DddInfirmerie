@@ -1,23 +1,20 @@
 package fr.esgi.ddd.infirmerie.model.diagnostic;
 
+import fr.esgi.ddd.infirmerie.model.Eleve;
 import fr.esgi.ddd.infirmerie.model.EtatSante;
 
 public class Diagnostic {
     
     private final String description;
     private final EtatSante etatSante;
-    private Boolean isLinkedToAntecedents;
+    private final Boolean linkedToAntecedents;
+    private final Eleve eleve;
 
-    public Diagnostic(String description, EtatSante etatSante) {
-        this.description = description;
+    public Diagnostic(EtatSante etatSante, Eleve eleve) {
+        this.description = this.getDescriptionFromEtat(etatSante);
         this.etatSante = etatSante;
-        this.isLinkedToAntecedents = false;
-    }
-
-    public Diagnostic(String description, EtatSante etatSante, Boolean isLinkedToAntecedents) {
-        this.description = description;
-        this.etatSante = etatSante;
-        this.isLinkedToAntecedents = isLinkedToAntecedents;
+        this.eleve = eleve;
+        this.linkedToAntecedents = eleve.antecedents.contains(etatSante);
     }
 
     public String getDescription() {
@@ -29,12 +26,31 @@ public class Diagnostic {
     }
 
     public Boolean isLinkedToAntecedants() {
-        return isLinkedToAntecedents;
+        return linkedToAntecedents;
     }
 
-    public void setAntecendents(Boolean antecendents) {
-        this.isLinkedToAntecedents = antecendents;
+    public Boolean getLinkedToAntecedents() {
+        return linkedToAntecedents;
     }
 
+    public Eleve getEleve() {
+        return eleve;
+    }
+
+    private String getDescriptionFromEtat(EtatSante etat){
+        
+        switch (etat) {
+            case BENIN:
+                return "Léger troubles";
+            case GRAVE:
+                return "Problème de santé grave";
+            case URGENT:
+                return "Problème de santé urgent";
+            case PSYCHOLOGIQUE:
+                return "Problème de nature psychologique";
+            default:
+                return "Impossible de diagnostiquer l'élève";
+        }
+    }
 
 };

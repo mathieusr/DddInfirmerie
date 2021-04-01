@@ -3,6 +3,8 @@ package fr.esgi.ddd.infirmerie.model;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import fr.esgi.ddd.infirmerie.use_case.diagnostic.CapaciteDepasseException;
+
 public class Infirmerie {
 
     private final String id;
@@ -18,7 +20,10 @@ public class Infirmerie {
         return this.capacity;
     }
 
-    public void addEleves (Eleve eleve){
+    public void addEleve(Eleve eleve) throws CapaciteDepasseException {
+        if (this.eleves.size() + 1 > this.capacity){
+            throw new CapaciteDepasseException("La capacité de l'infirmerie a été dépassée.");
+        }
         this.eleves.add(eleve);
     }
 

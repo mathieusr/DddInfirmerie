@@ -17,11 +17,7 @@ public class AllerInfirmerie {
 
     public EntreeInfirmerie aller(Eleve eleve) throws CapaciteDepasseException {
         
-        if (this.infirmerie.eleves.size() + 1 > this.infirmerie.getCapacity()){
-            throw new CapaciteDepasseException("La capacité de l'infirmerie a été dépassée.");
-        }
-        
-        this.infirmerie.addEleves(eleve);
+        this.infirmerie.addEleve(eleve);
         
         EntreeInfirmerie entree = new EntreeInfirmerie(this.infirmerie, eleve);
         return this.entreesInfirmerie.save(entree);
