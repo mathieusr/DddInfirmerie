@@ -7,6 +7,7 @@ import fr.esgi.ddd.infirmerie.model.diagnostic.Diagnostic;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -29,50 +30,24 @@ public class FaireDiagnosticTest {
     }
 
     @Test
-    public void should_diagnostic_student_with_harmless_symptoms(){
+    public void should_diagnostic_student_with_corresponding_symptom(){
+
+        List<EtatSante> etats = new ArrayList<>();
+        etats.add(EtatSante.GRAVE);
+        etats.add(EtatSante.BENIN);
+        etats.add(EtatSante.PSYCHOLOGIQUE);
+        etats.add(EtatSante.URGENT);
+        
         Eleve eleve = new Eleve();
 
-        FakeDiagnostics diagnostics = new FakeDiagnostics();
+        for (EtatSante etat: etats){
+            
+            FakeDiagnostics diagnostics = new FakeDiagnostics();
 
-        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
-        Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.BENIN);
+            FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
+            Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, etat);
 
-        assertTrue("le résultat du diagnostic doit être bénin", resultat.getEtatSante() == EtatSante.BENIN);
-    }
-
-    @Test
-    public void should_diagnostic_student_with_severe_symptoms(){
-        Eleve eleve = new Eleve();
-
-        FakeDiagnostics diagnostics = new FakeDiagnostics();
-
-        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
-        Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.GRAVE);
-
-        assertTrue("le résultat du diagnostic doit être grave", resultat.getEtatSante() == EtatSante.GRAVE);
-    }
-
-    @Test
-    public void should_diagnostic_student_with_urgent_symptoms(){
-        Eleve eleve = new Eleve();
-
-        FakeDiagnostics diagnostics = new FakeDiagnostics();
-
-        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
-        Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.URGENT);
-
-        assertTrue("Le résultat du diagnostic doit être urgent", resultat.getEtatSante() == EtatSante.URGENT);
-    }
-
-    @Test
-    public void should_diagnostic_student_with_psychological_symptoms(){
-        Eleve eleve = new Eleve();
-
-        FakeDiagnostics diagnostics = new FakeDiagnostics();
-
-        FaireDiagnostic faireDiagnostic = new FaireDiagnostic(diagnostics);
-        Diagnostic resultat = faireDiagnostic.diagnostiquer(eleve, EtatSante.PSYCHOLOGIQUE);
-
-        assertTrue("Le résultat du diagnostic doit être psychologique", resultat.getEtatSante() == EtatSante.PSYCHOLOGIQUE);
+            assertTrue(String.format("le résultat du diagnostic doit être %s", etat), resultat.getEtatSante() == etat);
+        }
     }
 }
