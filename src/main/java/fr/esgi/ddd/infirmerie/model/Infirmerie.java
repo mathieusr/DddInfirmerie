@@ -8,8 +8,8 @@ import fr.esgi.ddd.infirmerie.use_case.diagnostic.CapaciteDepasseException;
 public class Infirmerie {
 
     private final String id;
-    public ArrayList<Eleve> eleves = new ArrayList<>();
-    private int capacity;
+    public final ArrayList<Eleve> eleves = new ArrayList<>();
+    private final int capacity;
 
     public Infirmerie(int capacity){
         this.id = UUID.randomUUID().toString();
@@ -33,13 +33,5 @@ public class Infirmerie {
 
     public ArrayList<Eleve> getEleves() {
         return eleves;
-    }
-
-    public void setEleves(ArrayList<Eleve> eleves) {
-        this.eleves = eleves;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
     }
 };
