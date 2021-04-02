@@ -1,6 +1,7 @@
 package fr.esgi.ddd.infirmerie.use_case.diagnostic;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,6 @@ public class AllerInfirmerieTest {
             return;
         }
 
-        throw new Exception("use case must throw an exception when capacity is overwhelmed.");
+        fail("use case must throw an exception when capacity is overwhelmed.");
     }
 }
